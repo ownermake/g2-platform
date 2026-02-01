@@ -110,6 +110,43 @@
             transform: translateY(0);
         }
 
+        /* Earth & Data Animations */
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateFast {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        @keyframes floatingLines {
+            0% { stroke-dashoffset: 1000; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        .animate-rotate-slow { animation: rotateSlow 60s linear infinite; }
+        .animate-rotate-fast { animation: rotateFast 40s linear infinite; }
+        .animate-pulse-glow { animation: pulseGlow 4s ease-in-out infinite; }
+
+        .earth-grid {
+            background-image: 
+                linear-gradient(rgba(37, 99, 235, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .glow-sphere {
+            filter: blur(80px);
+            background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+        }
+
         ::selection {
             background-color: var(--blue);
             color: var(--white);

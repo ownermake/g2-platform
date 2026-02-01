@@ -10,11 +10,16 @@ import Targeting from './components/Targeting';
 import Company from './components/Company';
 import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
+import CompanyPage from './pages/CompanyPage';
+import VisionPage from './pages/VisionPage';
+
+type View = 'home' | 'company' | 'vision';
 
 const App: React.FC = () => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentView, setCurrentView] = useState<View>('home');
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -27,7 +32,11 @@ const App: React.FC = () => {
         const isInteractive = 
           target.tagName === 'A' || 
           target.tagName === 'BUTTON' || 
-          (typeof target.closest === 'function' && target.closest('.neo-button'));
+          target.closest('a') ||
+          target.closest('button') ||
+          target.closest('.neo-button') ||
+          target.classList.contains('cursor-pointer') ||
+          window.getComputedStyle(target).cursor === 'pointer';
         
         setIsHovering(!!isInteractive);
       }
@@ -52,35 +61,55 @@ const App: React.FC = () => {
       window.removeEventListener('mouseover', handleMouseOver);
       observer.disconnect();
     };
-  }, []);
+  }, [currentView]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  const navigateTo = (view: View) => {
+    setCurrentView(view);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="relative min-h-screen">
+      {/* 
+        Custom Cursor Optimization: 
+        - mixBlendMode: 'difference' により、白背景なら黒、黒背景なら白に自動反転。
+        - ホバー時は G2 Blue になり、blend mode を normal にすることでブランドカラーを優先。
+      */}
       <div 
         className="custom-cursor hidden md:block" 
         style={{ 
           left: `${cursorPos.x}px`, 
           top: `${cursorPos.y}px`,
-          transform: `translate(-50%, -50%) scale(${isHovering ? 3 : 1})`,
-          backgroundColor: isHovering ? 'var(--blue)' : 'transparent',
-          borderColor: isHovering ? 'transparent' : 'var(--black)',
-          opacity: isHovering ? 0.8 : 1
+          transform: `translate(-50%, -50%) scale(${isHovering ? 2.5 : 1})`,
+          backgroundColor: isHovering ? 'var(--blue)' : 'white',
+          mixBlendMode: isHovering ? 'normal' : 'difference',
+          border: 'none',
+          transition: 'transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.2s, mix-blend-mode 0.2s',
+          zIndex: 9999
         }} 
       />
       
-      <Navbar onJoinClick={openModal} />
+      <Navbar onJoinClick={openModal} onNavigate={navigateTo} currentView={currentView} />
       
       <main>
-        <Hero onActionClick={openModal} />
-        <About />
-        <AffiliateGuide />
-        <Features />
-        <Trust />
-        <Targeting onActionClick={openModal} />
-        <Company onContactClick={openModal} />
+        {currentView === 'home' ? (
+          <>
+            <Hero onActionClick={openModal} />
+            <About />
+            <AffiliateGuide />
+            <Features />
+            <Trust />
+            <Targeting onActionClick={openModal} />
+            <Company />
+          </>
+        ) : currentView === 'company' ? (
+          <CompanyPage />
+        ) : (
+          <VisionPage />
+        )}
       </main>
 
       <Footer />

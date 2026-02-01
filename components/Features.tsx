@@ -9,141 +9,140 @@ const Features: React.FC = () => {
           <h2 className="heading-brutal text-5xl sm:text-7xl md:text-9xl mb-8 leading-none">REAL<br /><span className="text-[var(--blue)]">DRIVE</span></h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24">
           
-          {/* Feature 01: Asset Design (Growing Architecture) */}
+          {/* Feature 01: Asset Design (Minimal Growth) */}
           <div className="fade-in-up group">
-            <div className="neo-border border-white overflow-hidden mb-8 neo-shadow-blue bg-black relative aspect-video flex justify-center items-center">
-              {/* Background Grid */}
-              <div className="absolute inset-0 earth-grid opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+            <div className="neo-border border-white/20 mb-10 bg-black relative aspect-video flex justify-center items-center overflow-hidden">
+              <div className="absolute inset-0 opacity-10">
+                <div className="w-full h-full earth-grid"></div>
+              </div>
               
-              {/* Animated Asset Visual */}
-              <div className="relative z-10 w-full h-full flex justify-center items-center">
-                <svg viewBox="0 0 200 120" className="w-4/5 h-4/5">
-                  <defs>
-                    <linearGradient id="scan-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="transparent" />
-                      <stop offset="50%" stopColor="var(--blue)" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="transparent" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {/* Scan Line Animation */}
-                  <rect x="0" y="0" width="200" height="40" fill="url(#scan-grad)">
-                    <animateTransform attributeName="transform" type="translate" from="0 -40" to="0 120" dur="3s" repeatCount="indefinite" />
-                  </rect>
-
-                  {/* Base Lines */}
-                  <path d="M40 100 L160 100" stroke="white" strokeWidth="0.5" strokeDasharray="2 2" />
-                  
-                  {/* Stacking Monoliths (Asset Growth) */}
-                  {[30, 55, 85, 65, 100].map((h, i) => (
+              <div className="relative w-full h-full flex items-end justify-center px-12 pb-12">
+                <svg viewBox="0 0 400 200" className="w-full h-48 overflow-visible">
+                  {[...Array(12)].map((_, i) => (
                     <g key={i}>
                       <rect 
-                        x={50 + i * 22} 
-                        y={100 - h} 
-                        width="18" 
-                        height={h} 
-                        fill="none" 
-                        stroke="var(--blue)" 
-                        strokeWidth="1"
-                        className="animate-pulse"
-                        style={{ animationDelay: `${i * 0.2}s` }}
-                      />
-                      {/* Inner Fill with transition */}
-                      <rect 
-                        x={50 + i * 22} 
-                        y={100 - h} 
-                        width="18" 
-                        height={h} 
+                        x={40 + i * 30} 
+                        y="200" 
+                        width="2" 
+                        height="0" 
                         fill="var(--blue)" 
-                        fillOpacity="0.1"
-                        className="transition-all duration-1000 group-hover:fill-opacity-30"
-                      />
-                      {/* Top Cap Reflective */}
-                      <line x1={50+i*22} y1={100-h} x2={68+i*22} y2={100-h} stroke="white" strokeWidth="2" className="animate-pulse" />
+                        className="transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:fill-white"
+                      >
+                        <animate 
+                          attributeName="height" 
+                          from="0" 
+                          to={60 + Math.sin(i * 0.5) * 40 + (i * 8)} 
+                          dur="2s" 
+                          begin={`${i * 0.1}s`} 
+                          fill="freeze" 
+                          calcMode="spline" 
+                          keySplines="0.23, 1, 0.32, 1"
+                        />
+                        <animate 
+                          attributeName="y" 
+                          from="200" 
+                          to={200 - (60 + Math.sin(i * 0.5) * 40 + (i * 8))} 
+                          dur="2s" 
+                          begin={`${i * 0.1}s`} 
+                          fill="freeze"
+                          calcMode="spline" 
+                          keySplines="0.23, 1, 0.32, 1"
+                        />
+                      </rect>
+                      {/* Top Highlight Dot */}
+                      <circle cx={41 + i * 30} cy={200 - (60 + Math.sin(i * 0.5) * 40 + (i * 8))} r="3" fill="var(--blue)" className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-1000">
+                        <animate attributeName="opacity" from="0" to="1" dur="0.5s" begin={`${1.5 + i * 0.1}s`} fill="freeze" />
+                      </circle>
                     </g>
                   ))}
-                  
-                  {/* Floating Data Nodes */}
-                  <circle cx="150" cy="30" r="1.5" fill="white" className="animate-ping" style={{ animationDuration: '3s' }} />
-                  <circle cx="60" cy="40" r="1.2" fill="var(--blue)" className="animate-bounce" style={{ animationDuration: '4s' }} />
+                  {/* Connecting Line */}
+                  <path 
+                    d={`M 41 200 ${[...Array(12)].map((_, i) => `L ${41 + i * 30} ${200 - (60 + Math.sin(i * 0.5) * 40 + (i * 8))}`).join(' ')}`} 
+                    fill="none" 
+                    stroke="var(--blue)" 
+                    strokeWidth="1" 
+                    strokeDasharray="1000" 
+                    strokeDashoffset="1000"
+                    className="opacity-40"
+                  >
+                    <animate attributeName="stroke-dashoffset" from="1000" to="0" dur="3s" begin="0.5s" fill="freeze" />
+                  </path>
                 </svg>
-                {/* Central Glow */}
-                <div className="absolute w-40 h-40 bg-[var(--blue)] rounded-full blur-[80px] opacity-20 group-hover:opacity-40 transition-opacity"></div>
+              </div>
+              
+              <div className="absolute top-6 left-6 flex items-center gap-3">
+                <div className="w-2 h-2 bg-[var(--blue)] rounded-full animate-ping"></div>
+                <span className="font-mono text-[10px] tracking-[0.3em] text-white/40">GROWTH_ENGINE</span>
               </div>
             </div>
             
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-4xl font-black heading-brutal italic opacity-20">01</span>
-              <h3 className="heading-brutal text-2xl md:text-3xl italic">資産化設計</h3>
+            <div className="flex items-center gap-6 mb-6">
+              <span className="text-5xl font-black heading-brutal italic text-white/10">01</span>
+              <h3 className="heading-brutal text-3xl md:text-4xl italic tracking-tighter">資産化設計</h3>
             </div>
-            <p className="text-base md:text-lg font-bold opacity-70 leading-relaxed max-w-lg">
-              単発の収益で終わらせない。データに基づいた構造的アプローチにより、時間の経過とともに価値が増大する資産型インフラを構築します。
+            <p className="text-lg md:text-xl font-bold opacity-50 leading-relaxed max-w-lg border-l-2 border-[var(--blue)] pl-6">
+              積み上がる成果、揺るぎない構造。<br />
+              一過性の数字を、永続的な資産へと変換する。
             </p>
           </div>
 
-          {/* Feature 02: Absolute Transparency (Refractive Prism) */}
+          {/* Feature 02: Absolute Transparency (Minimal Lens) */}
           <div className="fade-in-up group" style={{ transitionDelay: '0.2s' }}>
-            <div className="neo-border border-white overflow-hidden mb-8 neo-shadow bg-black relative aspect-video flex justify-center items-center">
-              {/* Background Grid */}
-              <div className="absolute inset-0 earth-grid opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+            <div className="neo-border border-white/20 mb-10 bg-black relative aspect-video flex justify-center items-center overflow-hidden">
+              <div className="absolute inset-0 opacity-10">
+                <div className="w-full h-full earth-grid"></div>
+              </div>
 
-              {/* Animated Transparency Visual */}
-              <div className="relative z-10 w-full h-full flex justify-center items-center">
-                <svg viewBox="0 0 200 120" className="w-3/5 h-3/5">
-                  {/* Pure White Scan Sweep */}
-                  <rect x="0" y="0" width="200" height="20" fill="white" fillOpacity="0.05">
-                    <animate attributeName="y" from="-20" to="120" dur="4s" repeatCount="indefinite" />
-                  </rect>
-
-                  {/* Central Prism (Diamond Shape) */}
-                  <g className="animate-rotate-slow" style={{ transformOrigin: 'center' }}>
-                    {/* Outer frame */}
-                    <path 
-                      d="M100 20 L140 60 L100 100 L60 60 Z" 
-                      fill="none" 
-                      stroke="white" 
-                      strokeWidth="1"
-                      strokeDasharray="4 4"
-                    />
-                    {/* Inner crystal core */}
-                    <path 
-                      d="M100 30 L130 60 L100 90 L70 60 Z" 
-                      fill="var(--blue)" 
-                      fillOpacity="0.2"
-                      stroke="var(--blue)" 
-                      strokeWidth="1.5"
-                    />
-                    <circle cx="100" cy="60" r="4" fill="white" className="animate-ping" style={{ animationDuration: '2s' }} />
-                  </g>
+              {/* Minimal Scanning Lens Visual */}
+              <div className="relative w-48 h-48 md:w-64 md:h-64">
+                <div className="absolute inset-0 border border-white/20 rounded-full animate-rotate-slow"></div>
+                <div className="absolute inset-2 border border-[var(--blue)]/40 rounded-full animate-rotate-fast" style={{ animationDirection: 'reverse' }}></div>
+                
+                {/* Core Lens */}
+                <div className="absolute inset-8 bg-[var(--blue)]/5 backdrop-blur-sm rounded-full flex items-center justify-center overflow-hidden">
+                  <div className="w-full h-px bg-[var(--blue)] shadow-[0_0_15px_var(--blue)] animate-pulse"></div>
                   
-                  {/* Digital Light Beams */}
-                  {[1, 2, 3].map((i) => (
+                  {/* Internal Aligned Grid */}
+                  <div className="absolute inset-0 flex flex-col justify-around py-8 opacity-40">
+                    {[...Array(6)].map((_, i) => (
+                      <div key={i} className="w-full h-[1px] bg-white"></div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Floating Labels */}
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 font-mono text-[8px] tracking-widest text-[var(--blue)] font-black">
+                  VERIFIED_STREAM
+                </div>
+              </div>
+
+              {/* Distorted background lines that "straighten" near center (Conceptual) */}
+              <div className="absolute inset-0 pointer-events-none opacity-20">
+                <svg className="w-full h-full">
+                  {[...Array(10)].map((_, i) => (
                     <line 
-                      key={i}
-                      x1="0" y1={40 + i * 10} 
-                      x2="200" y2={40 + i * 10} 
+                      key={i} 
+                      x1="0" y1={20 + i * 10 + "%"} 
+                      x2="100%" y2={25 + i * 10 + "%"} 
                       stroke="white" 
                       strokeWidth="0.5" 
-                      strokeOpacity="0.2"
-                      strokeDasharray="10 190"
-                    >
-                      <animate attributeName="stroke-dashoffset" from="200" to="0" dur={`${1.5 + i}s`} repeatCount="indefinite" />
-                    </line>
+                      className="animate-pulse"
+                      style={{ animationDelay: `${i * 0.2}s` }}
+                    />
                   ))}
                 </svg>
-                {/* Intense Purity Glow */}
-                <div className="absolute w-56 h-56 bg-white rounded-full blur-[100px] opacity-10 group-hover:opacity-30 transition-opacity"></div>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 mb-4">
-              <span className="text-4xl font-black heading-brutal italic text-[var(--blue)]">02</span>
-              <h3 className="heading-brutal text-2xl md:text-3xl text-[var(--blue)] italic">絶対的透明性</h3>
+            <div className="flex items-center gap-6 mb-6">
+              <span className="text-5xl font-black heading-brutal italic text-[var(--blue)]/20">02</span>
+              <h3 className="heading-brutal text-3xl md:text-4xl text-[var(--blue)] italic tracking-tighter">絶対的透明性</h3>
             </div>
-            <p className="text-base md:text-lg font-bold opacity-70 leading-relaxed max-w-lg">
-              すべてのトラフィックを可視化。ブラックボックスを排除し、広告主とパートナーが等しく真実のデータにアクセスできる環境を保証します。
+            <p className="text-lg md:text-xl font-bold opacity-50 leading-relaxed max-w-lg border-l-2 border-[var(--blue)] pl-6">
+              ノイズを排し、真実だけを抽出する。<br />
+              すべてのトラフィックに、改ざん不能な証明を。
             </p>
           </div>
 

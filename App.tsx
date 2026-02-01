@@ -20,6 +20,7 @@ const App: React.FC = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentView, setCurrentView] = useState<View>('home');
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -61,23 +62,46 @@ const App: React.FC = () => {
       window.removeEventListener('mouseover', handleMouseOver);
       observer.disconnect();
     };
-  }, [currentView]);
+  }, [currentView, isTransitioning]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const navigateTo = (view: View) => {
-    setCurrentView(view);
-    window.scrollTo(0, 0);
+    if (view === currentView) return;
+    
+    // ページ遷移演出開始
+    setIsTransitioning(true);
+    
+    // 幕が閉じきったタイミングでビューを切り替える
+    setTimeout(() => {
+      setCurrentView(view);
+      window.scrollTo(0, 0);
+      
+      // 幕を開ける
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 500);
+    }, 600);
   };
 
   return (
     <div className="relative min-h-screen">
       {/* 
-        Custom Cursor Optimization: 
-        - mixBlendMode: 'difference' により、白背景なら黒、黒背景なら白に自動反転。
-        - ホバー時は G2 Blue になり、blend mode を normal にすることでブランドカラーを優先。
+        Page Transition Overlay (Curtain Effect)
       */}
+      <div 
+        className={`fixed inset-0 z-[9998] bg-black transition-transform duration-700 ease-[cubic-bezier(0.87,0,0.13,1)] pointer-events-none ${
+          isTransitioning ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      />
+      <div 
+        className={`fixed inset-0 z-[9997] bg-[var(--blue)] transition-transform duration-700 delay-100 ease-[cubic-bezier(0.87,0,0.13,1)] pointer-events-none ${
+          isTransitioning ? 'translate-y-0' : 'translate-y-full'
+        }`}
+      />
+
+      {/* Custom Cursor */}
       <div 
         className="custom-cursor hidden md:block" 
         style={{ 
@@ -85,16 +109,17 @@ const App: React.FC = () => {
           top: `${cursorPos.y}px`,
           transform: `translate(-50%, -50%) scale(${isHovering ? 2.5 : 1})`,
           backgroundColor: isHovering ? 'var(--blue)' : 'white',
+          opacity: isHovering ? 0.6 : 1,
           mixBlendMode: isHovering ? 'normal' : 'difference',
           border: 'none',
-          transition: 'transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.2s, mix-blend-mode 0.2s',
+          transition: 'transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.2s, mix-blend-mode 0.2s, opacity 0.2s',
           zIndex: 9999
         }} 
       />
       
       <Navbar onJoinClick={openModal} onNavigate={navigateTo} currentView={currentView} />
       
-      <main>
+      <main className={`${isTransitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}>
         {currentView === 'home' ? (
           <>
             <Hero onActionClick={openModal} />

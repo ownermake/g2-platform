@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
 import CompanyPage from './pages/CompanyPage';
 import VisionPage from './pages/VisionPage';
+import Preloader from './components/Preloader';
 
 type View = 'home' | 'company' | 'vision';
 
@@ -21,10 +22,19 @@ const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentView, setCurrentView] = useState<View>('home');
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setCursorPos({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      setScrollProgress(scrolled);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -45,6 +55,7 @@ const App: React.FC = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseover', handleMouseOver);
+    window.addEventListener('scroll', handleScroll);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -60,66 +71,86 @@ const App: React.FC = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
+      window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
-  }, [currentView, isTransitioning]);
+  }, [currentView, isTransitioning, isLoading]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   const navigateTo = (view: View) => {
     if (view === currentView) return;
-    
-    // ページ遷移演出開始
     setIsTransitioning(true);
-    
-    // 幕が閉じきったタイミングでビューを切り替える
     setTimeout(() => {
       setCurrentView(view);
       window.scrollTo(0, 0);
-      
-      // 幕を開ける
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 500);
-    }, 600);
+      }, 100);
+    }, 450);
   };
 
   return (
     <div className="relative min-h-screen">
-      {/* 
-        Page Transition Overlay (Curtain Effect)
-      */}
+      {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
+      
+      {/* Top Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 w-full h-[3px] bg-black z-[100]">
+        <div 
+          className="h-full bg-[var(--blue)] transition-all duration-75 ease-out"
+          style={{ width: `${scrollProgress}%` }}
+        ></div>
+      </div>
+
+      {/* Dynamic Background Grid */}
       <div 
-        className={`fixed inset-0 z-[9998] bg-black transition-transform duration-700 ease-[cubic-bezier(0.87,0,0.13,1)] pointer-events-none ${
+        className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: 'radial-gradient(circle at center, #2563EB 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          transform: `translate(${(cursorPos.x - window.innerWidth / 2) * 0.015}px, ${(cursorPos.y - window.innerHeight / 2) * 0.015}px)`
+        }}
+      ></div>
+
+      {/* Page Transition Overlay - Pure Logo Branding */}
+      <div 
+        className={`fixed inset-0 z-[9998] bg-[var(--blue)] transition-transform duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)] pointer-events-none flex flex-col items-center justify-center ${
           isTransitioning ? 'translate-y-0' : '-translate-y-full'
         }`}
-      />
-      <div 
-        className={`fixed inset-0 z-[9997] bg-[var(--blue)] transition-transform duration-700 delay-100 ease-[cubic-bezier(0.87,0,0.13,1)] pointer-events-none ${
-          isTransitioning ? 'translate-y-0' : 'translate-y-full'
-        }`}
-      />
-
+      >
+        <div className="absolute inset-0 bg-black/5 opacity-50"></div>
+        
+        {/* Transition Logo Content */}
+        <div className={`transition-all duration-300 transform flex flex-col items-center ${isTransitioning ? 'opacity-100 scale-100 delay-150' : 'opacity-0 scale-95'}`}>
+           <div className="heading-brutal text-white text-[12vw] md:text-[10vw] italic tracking-tighter drop-shadow-[8px_8px_0px_rgba(0,0,0,0.2)]">
+             G2<span className="text-black">.</span>
+           </div>
+           <div className="w-12 h-1 bg-white/20 mt-4 overflow-hidden">
+             <div className={`h-full bg-white transition-all duration-500 ${isTransitioning ? 'w-full' : 'w-0'}`}></div>
+           </div>
+        </div>
+      </div>
+      
       {/* Custom Cursor */}
       <div 
         className="custom-cursor hidden md:block" 
         style={{ 
           left: `${cursorPos.x}px`, 
           top: `${cursorPos.y}px`,
-          transform: `translate(-50%, -50%) scale(${isHovering ? 2.5 : 1})`,
+          transform: `translate(-50%, -50%) scale(${isHovering ? 3 : 1})`,
           backgroundColor: isHovering ? 'var(--blue)' : 'white',
-          opacity: isHovering ? 0.6 : 1,
+          opacity: isHovering ? 0.7 : 1,
           mixBlendMode: isHovering ? 'normal' : 'difference',
           border: 'none',
-          transition: 'transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.2s, mix-blend-mode 0.2s, opacity 0.2s',
+          transition: 'transform 0.1s ease-out, background-color 0.2s, mix-blend-mode 0.2s, opacity 0.2s',
           zIndex: 9999
         }} 
       />
       
       <Navbar onJoinClick={openModal} onNavigate={navigateTo} currentView={currentView} />
       
-      <main className={`${isTransitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}>
+      <main className={`${isTransitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200 relative z-10`}>
         {currentView === 'home' ? (
           <>
             <Hero onActionClick={openModal} />

@@ -64,7 +64,7 @@ const VisionPage: React.FC = () => {
       </section>
 
       {/* Evolution Section: The Digital Globe */}
-      <section className="bg-black text-white py-32 md:py-64 overflow-hidden relative">
+      <section className="bg-black text-white py-32 md:py-64 overflow-hidden relative border-b-4 border-black">
         {/* Background Grid */}
         <div className="absolute inset-0 earth-grid opacity-20 pointer-events-none"></div>
         
@@ -144,20 +144,27 @@ const VisionPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Action Footer for Vision Page */}
-      <section className="py-32 px-6 md:px-10 text-center">
-        <div className="fade-in-up visible">
-          <h2 className="heading-brutal text-4xl md:text-6xl mb-12 italic">ARE YOU READY TO <br /><span className="text-[var(--blue)]">JOIN THE FUTURE?</span></h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <button className="neo-button bg-black text-white px-12 py-6 text-xl font-black uppercase tracking-tighter hover:bg-[var(--blue)] transition-colors">
-              BECOME A PARTNER
-            </button>
-            <button className="neo-button bg-white text-black px-12 py-6 text-xl font-black uppercase tracking-tighter">
-              EXPLORE MISSION
-            </button>
-          </div>
+      {/* RESTORED: BECOME A PARTNER SECTION */}
+      <section className="py-24 md:py-48 px-6 md:px-10 bg-[var(--blue)] text-white text-center border-b-4 border-black relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="w-full h-full earth-grid"></div>
+        </div>
+        <div className="max-w-4xl mx-auto relative z-10 fade-in-up visible">
+          <h2 className="heading-brutal text-5xl md:text-8xl mb-12 italic tracking-tighter leading-none">
+            BECOME A<br /><span className="text-black">PARTNER.</span>
+          </h2>
+          <p className="text-xl md:text-3xl font-black mb-12 italic leading-tight">
+            未来の価値を共に創り、<br className="hidden md:block" />
+            次世代のスタンダードを共に定義しませんか？
+          </p>
+          <button className="neo-button bg-white text-black px-12 py-6 heading-brutal text-2xl md:text-4xl italic hover:bg-black hover:text-white transition-colors">
+            JOIN THE NETWORK
+          </button>
         </div>
       </section>
+
+      {/* Decorative Padding */}
+      <div className="py-20 bg-[var(--bg)]"></div>
     </div>
   );
 };

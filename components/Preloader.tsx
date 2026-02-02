@@ -6,55 +6,80 @@ const Preloader: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
   const [isDone, setIsDone] = useState(false);
 
   useEffect(() => {
-    let start = 0;
-    const end = 100;
-    const duration = 2000;
-    const increment = end / (duration / 16);
+    const duration = 2000; // 2 seconds
+    const startTime = Date.now();
 
-    const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
-        setCount(100);
-        clearInterval(timer);
+    const update = () => {
+      const now = Date.now();
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Smooth linear-ish progress for the bar
+      setCount(Math.floor(progress * 100));
+
+      if (progress < 1) {
+        requestAnimationFrame(update);
+      } else {
         setTimeout(() => {
           setIsDone(true);
           setTimeout(onComplete, 800);
-        }, 300);
-      } else {
-        setCount(Math.floor(start));
+        }, 800);
       }
-    }, 16);
+    };
 
-    return () => clearInterval(timer);
+    requestAnimationFrame(update);
   }, [onComplete]);
 
   return (
-    <div className={`fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center transition-transform duration-700 ease-[cubic-bezier(0.87,0,0.13,1)] ${isDone ? '-translate-y-full' : 'translate-y-0'}`}>
-      <div className="relative overflow-hidden mb-8">
-        <h1 className="heading-brutal text-white text-[15vw] leading-none select-none">
-          G<span className="text-[var(--blue)]">2</span>
-        </h1>
-        <div className="absolute inset-0 bg-white/10 mix-blend-overlay animate-pulse"></div>
-      </div>
-      
-      <div className="w-[80%] max-w-md h-1 bg-white/10 relative overflow-hidden mb-4">
-        <div 
-          className="absolute top-0 left-0 h-full bg-[var(--blue)] transition-all duration-100 ease-out" 
-          style={{ width: `${count}%` }}
-        ></div>
-      </div>
+    <div className={`fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center transition-opacity duration-1000 ${isDone ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      <style>{`
+        .boot-font {
+          font-family: 'Courier New', Courier, monospace;
+          letter-spacing: 0.3em;
+        }
+        .logo-font {
+          font-family: 'Archivo Black', sans-serif;
+          letter-spacing: -0.05em;
+        }
+        .progress-line {
+          height: 4px;
+          background-color: var(--blue);
+          transition: width 0.1s linear;
+        }
+      `}</style>
 
-      <div className="flex justify-between w-[80%] max-w-md font-mono text-[10px] text-white/40 tracking-[0.5em]">
-        <span>SYSTEM_BOOT_LOG</span>
-        <span>{count}%</span>
-      </div>
+      <div className="w-full max-w-[85%] md:max-w-3xl flex flex-col">
+        {/* G2 Logo Section */}
+        <div className="flex justify-center mb-24">
+          <div className="logo-font text-[18vw] md:text-[12rem] leading-none flex select-none">
+            <span className="text-white">G</span>
+            <span className="text-[var(--blue)]">2</span>
+          </div>
+        </div>
 
-      <div className="mt-12 overflow-hidden h-4">
-        <div className="animate-bounce font-mono text-[8px] text-[var(--blue)] tracking-widest uppercase">
-          {count < 30 && "Initializing core components..."}
-          {count >= 30 && count < 60 && "Establishing secure protocols..."}
-          {count >= 60 && count < 90 && "Calibrating traffic nodes..."}
-          {count >= 90 && "Ready for deployment."}
+        {/* Progress Bar Line */}
+        <div className="w-full bg-white/5 h-[4px] mb-6">
+          <div 
+            className="progress-line"
+            style={{ width: `${count}%` }}
+          ></div>
+        </div>
+
+        {/* System Log & Percentage */}
+        <div className="flex justify-between items-center mb-24 boot-font text-[10px] md:text-sm font-bold text-gray-500 uppercase">
+          <div className="flex gap-4">
+            <span>S Y S T E M _ B O O T _ L O G</span>
+          </div>
+          <div className="flex items-center">
+            <span>{count}%</span>
+          </div>
+        </div>
+
+        {/* Status Message */}
+        <div className="text-center h-8">
+          <div className={`boot-font text-[10px] md:text-xs text-[var(--blue)] font-bold transition-opacity duration-500 ${count > 90 ? 'opacity-100' : 'opacity-0'}`}>
+            READY FOR DEPLOYMENT.
+          </div>
         </div>
       </div>
     </div>

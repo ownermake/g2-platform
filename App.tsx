@@ -22,8 +22,8 @@ const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentView, setCurrentView] = useState<View>('home');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -57,16 +57,30 @@ const App: React.FC = () => {
     window.addEventListener('mouseover', handleMouseOver);
     window.addEventListener('scroll', handleScroll);
 
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, { threshold: 0.1 });
+    }, observerOptions);
 
-    const fadeElements = document.querySelectorAll('.fade-in-up');
-    fadeElements.forEach((el) => observer.observe(el));
+    // Initial scan and observation
+    const scanElements = () => {
+      const elements = document.querySelectorAll('.fade-in-up');
+      elements.forEach(el => observer.observe(el));
+    };
+
+    // Run scan whenever the view changes or loading finishes
+    if (!isLoading) {
+      setTimeout(scanElements, 100);
+    }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
@@ -74,7 +88,7 @@ const App: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
       observer.disconnect();
     };
-  }, [currentView, isTransitioning, isLoading]);
+  }, [isLoading, currentView]);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -113,21 +127,16 @@ const App: React.FC = () => {
         }}
       ></div>
 
-      {/* Page Transition Overlay - Pure Logo Branding */}
+      {/* Page Transition Overlay */}
       <div 
         className={`fixed inset-0 z-[9998] bg-[var(--blue)] transition-transform duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)] pointer-events-none flex flex-col items-center justify-center ${
           isTransitioning ? 'translate-y-0' : '-translate-y-full'
         }`}
       >
         <div className="absolute inset-0 bg-black/5 opacity-50"></div>
-        
-        {/* Transition Logo Content */}
         <div className={`transition-all duration-300 transform flex flex-col items-center ${isTransitioning ? 'opacity-100 scale-100 delay-150' : 'opacity-0 scale-95'}`}>
            <div className="heading-brutal text-white text-[12vw] md:text-[10vw] italic tracking-tighter drop-shadow-[8px_8px_0px_rgba(0,0,0,0.2)]">
              G2<span className="text-black">.</span>
-           </div>
-           <div className="w-12 h-1 bg-white/20 mt-4 overflow-hidden">
-             <div className={`h-full bg-white transition-all duration-500 ${isTransitioning ? 'w-full' : 'w-0'}`}></div>
            </div>
         </div>
       </div>
@@ -148,27 +157,31 @@ const App: React.FC = () => {
         }} 
       />
       
-      <Navbar onJoinClick={openModal} onNavigate={navigateTo} currentView={currentView} />
-      
-      <main className={`${isTransitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200 relative z-10`}>
-        {currentView === 'home' ? (
-          <>
-            <Hero onActionClick={openModal} />
-            <About />
-            <AffiliateGuide />
-            <Features />
-            <Trust />
-            <Targeting onActionClick={openModal} />
-            <Company />
-          </>
-        ) : currentView === 'company' ? (
-          <CompanyPage />
-        ) : (
-          <VisionPage />
-        )}
-      </main>
+      {!isLoading && (
+        <>
+          <Navbar onJoinClick={openModal} onNavigate={navigateTo} currentView={currentView} />
+          
+          <main className={`${isTransitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200 relative z-10`}>
+            {currentView === 'home' ? (
+              <>
+                <Hero />
+                <About />
+                <AffiliateGuide />
+                <Features />
+                <Trust />
+                <Targeting onActionClick={openModal} />
+                <Company />
+              </>
+            ) : currentView === 'company' ? (
+              <CompanyPage />
+            ) : (
+              <VisionPage />
+            )}
+          </main>
 
-      <Footer />
+          <Footer />
+        </>
+      )}
 
       <ContactModal isOpen={isModalOpen} onClose={closeModal} />
     </div>

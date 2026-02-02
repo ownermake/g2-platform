@@ -6,7 +6,7 @@ const CompanyPage: React.FC = () => {
     { label: '社名', value: '株式会社G2' },
     { label: '所在地', value: '大阪府大阪市西区土佐堀 2-1-3' },
     { label: '設立', value: '2026年3月' },
-    { label: '資本金', value: '3,000,000円' },
+    { label: '資本金', value: '2,000,000円' },
     { label: '代表者', value: '三浦賢人' },
     { label: '事業内容', value: '成果報酬型広告（アフィリエイト）プラットフォーム事業' },
   ];

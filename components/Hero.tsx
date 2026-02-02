@@ -2,11 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import ThreeCube from './ThreeCube';
 
-interface HeroProps {
-  onActionClick?: () => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ onActionClick }) => {
+const Hero: React.FC = () => {
   const [progress, setProgress] = useState(0);
   const [sysCode, setSysCode] = useState("G2_SYS_INIT");
 
@@ -34,7 +30,7 @@ const Hero: React.FC<HeroProps> = ({ onActionClick }) => {
         <ThreeCube />
       </div>
 
-      <div className="px-6 md:px-10 mb-8 fade-in-up">
+      <div className="px-6 md:px-10 mb-8 fade-in-up visible">
         <div className="flex flex-col lg:flex-row gap-0 items-stretch">
           <div className="bg-black text-white neo-border px-8 py-6 flex flex-wrap items-center gap-x-12 gap-y-4 neo-shadow-blue z-10 relative overflow-hidden flex-grow">
             <div className="flex flex-col min-w-[180px]">
@@ -46,7 +42,7 @@ const Hero: React.FC<HeroProps> = ({ onActionClick }) => {
               <span className="text-[10px] font-black opacity-40 tracking-[0.4em] uppercase mb-1">Launch_Target</span>
               <div className="flex items-center gap-6 leading-none">
                 <span className="font-black text-3xl md:text-5xl text-[var(--blue)] heading-brutal italic tracking-tighter uppercase">
-                  MARCH <span className="text-white">2025</span>
+                  MARCH <span className="text-white">2026</span>
                 </span>
               </div>
             </div>
@@ -62,7 +58,7 @@ const Hero: React.FC<HeroProps> = ({ onActionClick }) => {
         </div>
       </div>
 
-      <div className="px-6 md:px-10 mb-12 md:mb-20 fade-in-up z-10" style={{ transitionDelay: '0.1s' }}>
+      <div className="px-6 md:px-10 mb-12 md:mb-20 fade-in-up visible z-10" style={{ transitionDelay: '0.1s' }}>
         <div className="mb-4 inline-block px-4 py-2 bg-black text-white text-[10px] md:text-xs font-bold tracking-[0.1em] neo-shadow">
           成果報酬型広告プラットフォーム
         </div>
@@ -80,15 +76,13 @@ const Hero: React.FC<HeroProps> = ({ onActionClick }) => {
 
       <div className="marquee-container -rotate-1 mb-10">
         <div className="marquee-content text-[15vw] md:text-[10vw]">
-          &nbsp;LAUNCHING MARCH 2025 * SYSTEM ONLINE * G2 PERFORMANCE * 3月全面始動 *&nbsp;
-          &nbsp;LAUNCHING MARCH 2025 * SYSTEM ONLINE * G2 PERFORMANCE * 3月全面始動 *&nbsp;
+          &nbsp;LAUNCHING MARCH 2026 * SYSTEM ONLINE * G2 PERFORMANCE * 3月全面始動 *&nbsp;
+          &nbsp;LAUNCHING MARCH 2026 * SYSTEM ONLINE * G2 PERFORMANCE * 3月全面始動 *&nbsp;
         </div>
       </div>
 
-      <div className="px-6 md:px-10 flex flex-col sm:flex-row gap-4 md:gap-6 fade-in-up pb-20" style={{ transitionDelay: '0.3s' }}>
-        <button onClick={onActionClick} className="neo-button bg-black text-white px-8 md:px-14 py-5 md:py-7 text-xl md:text-2xl font-black uppercase tracking-tighter w-full sm:w-auto">ADVERTISER</button>
-        <button onClick={onActionClick} className="neo-button bg-white text-black px-8 md:px-14 py-5 md:py-7 text-xl md:text-2xl font-black uppercase tracking-tighter w-full sm:w-auto">AFFILIATE</button>
-      </div>
+      {/* Hero buttons removed to prioritize the strategic Targeting section below */}
+      <div className="pb-20"></div>
     </section>
   );
 };

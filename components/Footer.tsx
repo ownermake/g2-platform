@@ -28,7 +28,16 @@ const Footer: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 text-sm font-bold uppercase tracking-widest">
             <div>
               <p className="text-[9px] opacity-30 mb-6 font-black tracking-[0.5em]">CONTACT_US</p>
-              <p className="mb-2 hover:text-[var(--blue)] transition-colors cursor-pointer">06-XXXX-XXXX</p>
+              <div className="flex items-center gap-3 mb-2">
+                <p className="hover:text-[var(--blue)] transition-colors cursor-pointer">06-XXXX-XXXX</p>
+                <span className="bg-black text-white px-2 py-0.5 text-[8px] font-black tracking-widest flex items-center gap-1.5 border border-white/20 select-none">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--blue)] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--blue)]"></span>
+                  </span>
+                  現在回線準備中
+                </span>
+              </div>
               <p className="hover:text-[var(--blue)] transition-colors cursor-pointer">contact@g2-platform.com</p>
             </div>
             <div>
@@ -47,7 +56,7 @@ const Footer: React.FC = () => {
              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
              <a href="#" className="hover:text-white transition-colors">Term of Service</a>
           </div>
-          <p className="text-[9px] font-black tracking-[0.4em] uppercase opacity-20">© 2025 G2. BEYOND THE LIMITS.</p>
+          <p className="text-[9px] font-black tracking-[0.4em] uppercase opacity-20">© 2026 G2. BEYOND THE LIMITS.</p>
         </div>
       </div>
     </footer>

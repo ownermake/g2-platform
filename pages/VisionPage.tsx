@@ -10,10 +10,15 @@ const VisionPage: React.FC = () => {
           <div className="inline-block px-4 py-2 bg-[var(--blue)] text-white neo-border mb-8 font-black text-xs uppercase tracking-[0.3em]">
             The Vision Manifesto
           </div>
-          <h1 className="heading-brutal text-6xl sm:text-8xl md:text-[10rem] lg:text-[13rem] leading-[0.85] tracking-tighter mb-12">
+          <h1 className="heading-brutal text-6xl sm:text-8xl md:text-[10rem] lg:text-[13rem] leading-[0.85] tracking-tighter mb-4">
             REWRITE<br />
             THE <span className="text-[var(--blue)]">RULES</span>.
           </h1>
+          <div className="mb-12">
+            <span className="text-2xl md:text-4xl font-black italic tracking-tighter bg-black text-white px-4 py-1">
+              常識を塗り替える
+            </span>
+          </div>
           <div className="max-w-4xl border-l-8 border-black pl-8 py-6">
             <p className="text-2xl md:text-5xl font-black italic leading-none uppercase">
               "成果報酬"を<br />

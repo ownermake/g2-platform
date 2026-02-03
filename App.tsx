@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import AffiliateGuide from './components/AffiliateGuide';
 import Features from './components/Features';
 import Trust from './components/Trust';
 import Targeting from './components/Targeting';
@@ -12,9 +11,10 @@ import Footer from './components/Footer';
 import ContactModal from './components/ContactModal';
 import CompanyPage from './pages/CompanyPage';
 import VisionPage from './pages/VisionPage';
+import GuidePage from './pages/GuidePage';
 import Preloader from './components/Preloader';
 
-type View = 'home' | 'company' | 'vision';
+type View = 'home' | 'company' | 'vision' | 'guide';
 
 const App: React.FC = () => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -166,7 +166,6 @@ const App: React.FC = () => {
               <>
                 <Hero />
                 <About />
-                <AffiliateGuide />
                 <Features />
                 <Trust />
                 <Targeting onActionClick={openModal} />
@@ -174,8 +173,10 @@ const App: React.FC = () => {
               </>
             ) : currentView === 'company' ? (
               <CompanyPage />
-            ) : (
+            ) : currentView === 'vision' ? (
               <VisionPage />
+            ) : (
+              <GuidePage />
             )}
           </main>
 

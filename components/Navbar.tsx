@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 
 interface NavbarProps {
   onJoinClick?: () => void;
-  onNavigate: (view: 'home' | 'company' | 'vision') => void;
-  currentView: 'home' | 'company' | 'vision';
+  onNavigate: (view: 'home' | 'company' | 'vision' | 'guide') => void;
+  currentView: 'home' | 'company' | 'vision' | 'guide';
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onJoinClick, onNavigate, currentView }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const handleNavigate = (view: 'home' | 'company' | 'vision') => {
+  const handleNavigate = (view: 'home' | 'company' | 'vision' | 'guide') => {
     onNavigate(view);
     setIsMobileMenuOpen(false);
   };
@@ -26,33 +26,39 @@ const Navbar: React.FC<NavbarProps> = ({ onJoinClick, onNavigate, currentView })
         </div>
         
         {/* Desktop Links */}
-        <div className="hidden md:flex gap-8 text-[10px] font-black uppercase tracking-[0.2em]">
+        <div className="hidden md:flex gap-8 text-[11px] font-black uppercase tracking-[0.1em]">
           <button 
             onClick={() => handleNavigate('home')}
-            className={`${currentView === 'home' ? 'text-[var(--blue)]' : 'hover:text-[var(--blue)]'} transition-colors uppercase`}
+            className={`${currentView === 'home' ? 'text-[var(--blue)]' : 'hover:text-[var(--blue)]'} transition-colors`}
           >
-            Home
+            ホーム
+          </button>
+          <button 
+            onClick={() => handleNavigate('guide')}
+            className={`${currentView === 'guide' ? 'text-[var(--blue)]' : 'hover:text-[var(--blue)]'} transition-colors`}
+          >
+            ガイド
           </button>
           <button 
             onClick={() => handleNavigate('vision')}
-            className={`${currentView === 'vision' ? 'text-[var(--blue)]' : 'hover:text-[var(--blue)]'} transition-colors uppercase`}
+            className={`${currentView === 'vision' ? 'text-[var(--blue)]' : 'hover:text-[var(--blue)]'} transition-colors`}
           >
-            Vision
+            ビジョン
           </button>
           <button 
             onClick={() => handleNavigate('company')}
-            className={`${currentView === 'company' ? 'text-[var(--blue)]' : 'hover:text-[var(--blue)]'} transition-colors uppercase`}
+            className={`${currentView === 'company' ? 'text-[var(--blue)]' : 'hover:text-[var(--blue)]'} transition-colors`}
           >
-            Company
+            会社概要
           </button>
         </div>
 
         <div className="flex items-center gap-4">
           <button 
             onClick={onJoinClick}
-            className="neo-button bg-[var(--blue)] text-white px-4 md:px-5 py-2 text-[9px] md:text-[10px] font-black uppercase tracking-widest hidden sm:block"
+            className="neo-button bg-[var(--blue)] text-white px-4 md:px-5 py-2 text-[10px] md:text-[11px] font-black tracking-widest hidden sm:block"
           >
-            Join Us
+            新規登録
           </button>
           
           {/* Mobile Menu Toggle */}
@@ -69,32 +75,42 @@ const Navbar: React.FC<NavbarProps> = ({ onJoinClick, onNavigate, currentView })
 
       {/* Mobile Menu Overlay */}
       <div className={`fixed inset-0 z-[55] bg-white transition-transform duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex flex-col h-full pt-32 px-10 gap-8">
+        <div className="flex flex-col h-full pt-32 px-10 gap-8 overflow-y-auto pb-20 font-black">
           <button 
             onClick={() => handleNavigate('home')}
-            className="heading-brutal text-6xl text-left italic border-b-4 border-black pb-2"
+            className="text-6xl text-left italic border-b-4 border-black pb-2 flex justify-between items-end"
           >
-            HOME<span className={currentView === 'home' ? 'text-[var(--blue)]' : ''}>.</span>
+            <span>ホーム</span>
+            <span className="text-sm opacity-30">HOME</span>
+          </button>
+          <button 
+            onClick={() => handleNavigate('guide')}
+            className="text-6xl text-left italic border-b-4 border-black pb-2 flex justify-between items-end"
+          >
+            <span>ガイド</span>
+            <span className="text-sm opacity-30">GUIDE</span>
           </button>
           <button 
             onClick={() => handleNavigate('vision')}
-            className="heading-brutal text-6xl text-left italic border-b-4 border-black pb-2"
+            className="text-6xl text-left italic border-b-4 border-black pb-2 flex justify-between items-end"
           >
-            VISION<span className={currentView === 'vision' ? 'text-[var(--blue)]' : ''}>.</span>
+            <span>ビジョン</span>
+            <span className="text-sm opacity-30">VISION</span>
           </button>
           <button 
             onClick={() => handleNavigate('company')}
-            className="heading-brutal text-6xl text-left italic border-b-4 border-black pb-2"
+            className="text-6xl text-left italic border-b-4 border-black pb-2 flex justify-between items-end"
           >
-            COMPANY<span className={currentView === 'company' ? 'text-[var(--blue)]' : ''}>.</span>
+            <span>会社概要</span>
+            <span className="text-sm opacity-30">COMPANY</span>
           </button>
           
-          <div className="mt-auto mb-10">
+          <div className="mt-8">
             <button 
               onClick={() => { onJoinClick?.(); setIsMobileMenuOpen(false); }}
-              className="neo-button bg-[var(--blue)] text-white w-full py-6 heading-brutal text-3xl italic"
+              className="neo-button bg-[var(--blue)] text-white w-full py-6 text-3xl italic"
             >
-              JOIN US
+              今すぐ始める
             </button>
           </div>
         </div>

@@ -14,20 +14,20 @@ const Footer: React.FC = () => {
           
           <div className="max-w-xl">
             <div className="heading-brutal text-6xl md:text-8xl italic mb-8">
-              MAKE<br />SUCCESS<br /><span className="text-[var(--blue)]">SUSTAINABLE.</span>
+              成功を、<br />永続的な<br /><span className="text-[var(--blue)]">資産へ。</span>
             </div>
             <div className="flex flex-wrap gap-8 font-black text-[10px] tracking-[0.3em] uppercase opacity-40">
-              <span>Trust</span>
+              <span>信頼</span>
               <span>•</span>
-              <span>Growth</span>
+              <span>成長</span>
               <span>•</span>
-              <span>Transparency</span>
+              <span>透明性</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 text-sm font-bold uppercase tracking-widest">
             <div>
-              <p className="text-[9px] opacity-30 mb-6 font-black tracking-[0.5em]">CONTACT_US</p>
+              <p className="text-[9px] opacity-30 mb-6 font-black tracking-[0.5em] uppercase">お問い合わせ</p>
               <div className="flex items-center gap-3 mb-2">
                 <p className="hover:text-[var(--blue)] transition-colors cursor-pointer">06-XXXX-XXXX</p>
                 <span className="bg-black text-white px-2 py-0.5 text-[8px] font-black tracking-widest flex items-center gap-1.5 border border-white/20 select-none">
@@ -35,14 +35,14 @@ const Footer: React.FC = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--blue)] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[var(--blue)]"></span>
                   </span>
-                  現在回線準備中
+                  回線準備中
                 </span>
               </div>
               <p className="hover:text-[var(--blue)] transition-colors cursor-pointer">contact@g2-platform.com</p>
             </div>
             <div>
-              <p className="text-[9px] opacity-30 mb-6 font-black tracking-[0.5em]">HEADQUARTERS</p>
-              <p className="opacity-60 leading-relaxed">
+              <p className="text-[9px] opacity-30 mb-6 font-black tracking-[0.5em] uppercase">所在地</p>
+              <p className="opacity-60 leading-relaxed font-black">
                 〒550-0001<br />
                 大阪府大阪市西区土佐堀 2-1-3<br />
                 G2 OSAKA BASE
@@ -52,11 +52,11 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 pt-10 border-t border-white/10">
-          <div className="flex gap-12 text-[9px] font-black uppercase tracking-widest opacity-40">
-             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-             <a href="#" className="hover:text-white transition-colors">Term of Service</a>
+          <div className="flex gap-12 text-[10px] font-black uppercase tracking-widest opacity-40">
+             <a href="#" className="hover:text-white transition-colors">プライバシーポリシー</a>
+             <a href="#" className="hover:text-white transition-colors">利用規約</a>
           </div>
-          <p className="text-[9px] font-black tracking-[0.4em] uppercase opacity-20">© 2026 G2. BEYOND THE LIMITS.</p>
+          <p className="text-[9px] font-black tracking-[0.4em] uppercase opacity-20">© 2026 G2. 限界を超え、その先へ。</p>
         </div>
       </div>
     </footer>

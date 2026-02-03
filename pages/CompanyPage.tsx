@@ -15,10 +15,15 @@ const CompanyPage: React.FC = () => {
     <div className="pt-32 pb-24 bg-[var(--bg)]">
       {/* Page Hero */}
       <section className="px-6 md:px-10 mb-20 md:mb-32 overflow-hidden">
-        <div className="fade-in-up visible text-center md:text-left">
-          <h1 className="heading-brutal text-5xl sm:text-7xl md:text-[10rem] lg:text-[12rem] leading-[0.8] mb-12 tracking-tighter uppercase whitespace-nowrap">
+        <div className="fade-in-up visible">
+          <h1 className="heading-brutal text-6xl sm:text-8xl md:text-[10rem] lg:text-[12rem] leading-[0.8] mb-6 tracking-tighter uppercase">
             COMPANY<span className="text-[var(--blue)]">.</span>
           </h1>
+          <div className="mb-12">
+            <span className="text-2xl md:text-5xl font-black italic tracking-tighter bg-black text-white px-6 py-2">
+              会社概要
+            </span>
+          </div>
           <div className="max-w-3xl border-l-8 border-black pl-8 py-4">
             <p className="text-xl md:text-3xl font-black italic leading-tight">
               WE ARE NOT JUST AN ASP.<br />
@@ -31,7 +36,7 @@ const CompanyPage: React.FC = () => {
       {/* Corporate Table Section */}
       <section className="px-6 md:px-10 mb-32">
         <div className="max-w-7xl mx-auto">
-          <h2 className="heading-brutal text-3xl md:text-5xl mb-12">CORPORATE <span className="text-[var(--blue)]">PROFILE</span></h2>
+          <h2 className="heading-brutal text-3xl md:text-5xl mb-12 italic">CORPORATE <span className="text-[var(--blue)]">PROFILE</span></h2>
           
           <div className="grid grid-cols-1 md:grid-cols-12 border-t-4 border-black">
             {profileData.map((item, index) => (
@@ -69,7 +74,7 @@ const CompanyPage: React.FC = () => {
                 インターネット広告の世界は、日々複雑化しています。しかし、その根底にある「価値を伝え、成果を生む」という本質は変わりません。
               </p>
               <p>
-                G2が目指すのは、単なる広告の仲介役ではありません。広告主様とパートナー様、双方が持続的に成長し続けられる「プラットフォーム」としての在り方を追求しています。
+                G2が目指すのは、単なる広告の仲介役ではありません。広告主様とパートナー様、双方が持続的に成長し続けられる「プラットフォーム」としての大在り方を追求しています。
               </p>
               <p>
                 不透明さを排除し、純粋な成果と信頼を積み上げる。それが、私たちが定義する次世代のスタンダードです。

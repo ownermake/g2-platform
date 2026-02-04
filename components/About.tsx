@@ -3,7 +3,7 @@ import React from 'react';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 md:py-48 px-6 md:px-10 bg-white overflow-hidden">
+    <section id="about" className="pt-24 md:pt-48 pb-16 md:pb-24 px-6 md:px-10 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row gap-16 md:gap-32 items-start">
           

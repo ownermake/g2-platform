@@ -11,11 +11,11 @@ const GuidePage: React.FC = () => {
             The Knowledge Base
           </div>
           <h1 className="heading-brutal text-6xl sm:text-8xl md:text-[10rem] lg:text-[12rem] leading-[0.8] mb-6 tracking-tighter uppercase whitespace-nowrap">
-            GUIDE<span className="text-[var(--blue)]">.</span>
+            AFFILIATE<span className="text-[var(--blue)]">.</span>
           </h1>
           <div className="mb-12">
             <span className="text-2xl md:text-5xl font-black italic tracking-tighter bg-black text-white px-6 py-2">
-              ご利用ガイド
+              アフィリエイトとは
             </span>
           </div>
           <div className="max-w-4xl border-l-8 border-black pl-8 py-4">
@@ -51,7 +51,7 @@ const GuidePage: React.FC = () => {
               <div className="bg-[var(--blue)] text-white p-8 neo-border neo-shadow">
                 <h3 className="heading-brutal text-xl mb-4 italic">FOR ADVERTISERS</h3>
                 <p className="font-bold opacity-80 leading-relaxed text-sm md:text-base">
-                  初期費用や掲載料ではなく、実際の売上や獲得に対してのみ費用が発生。マーケティング予算を100%効率的に運用することが可能です。
+                  初期費用や掲載料ではなく、実際の売上や獲得に対してのみ費用が発生. マーケティング予算を100%効率的に運用することが可能です。
                 </p>
               </div>
               <div className="bg-black text-white p-8 neo-border neo-shadow">

@@ -71,13 +71,11 @@ const App: React.FC = () => {
       });
     }, observerOptions);
 
-    // Initial scan and observation
     const scanElements = () => {
       const elements = document.querySelectorAll('.fade-in-up');
       elements.forEach(el => observer.observe(el));
     };
 
-    // Run scan whenever the view changes or loading finishes
     if (!isLoading) {
       setTimeout(scanElements, 100);
     }
@@ -95,13 +93,21 @@ const App: React.FC = () => {
 
   const navigateTo = (view: View) => {
     if (view === currentView) return;
+    
     setIsTransitioning(true);
+    
+    // カーテンが完全に閉まりきるまで待つ (400ms transition + a little buffer)
     setTimeout(() => {
+      // 瞬時にトップへ移動（CSSのsmooth scrollが無効なので即座に移動する）
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      
+      // コンテンツの切り替え
       setCurrentView(view);
-      window.scrollTo(0, 0);
+      
+      // 少し待ってからカーテンを開ける
       setTimeout(() => {
         setIsTransitioning(false);
-      }, 100);
+      }, 150);
     }, 450);
   };
 
@@ -109,7 +115,6 @@ const App: React.FC = () => {
     <div className="relative min-h-screen">
       {isLoading && <Preloader onComplete={() => setIsLoading(false)} />}
       
-      {/* Top Scroll Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-[3px] bg-black z-[100]">
         <div 
           className="h-full bg-[var(--blue)] transition-all duration-75 ease-out"
@@ -117,7 +122,6 @@ const App: React.FC = () => {
         ></div>
       </div>
 
-      {/* Dynamic Background Grid */}
       <div 
         className="fixed inset-0 z-0 pointer-events-none opacity-[0.03]"
         style={{
@@ -127,7 +131,6 @@ const App: React.FC = () => {
         }}
       ></div>
 
-      {/* Page Transition Overlay */}
       <div 
         className={`fixed inset-0 z-[9998] bg-[var(--blue)] transition-transform duration-[400ms] ease-[cubic-bezier(0.23,1,0.32,1)] pointer-events-none flex flex-col items-center justify-center ${
           isTransitioning ? 'translate-y-0' : '-translate-y-full'
@@ -141,7 +144,6 @@ const App: React.FC = () => {
         </div>
       </div>
       
-      {/* Custom Cursor */}
       <div 
         className="custom-cursor hidden md:block" 
         style={{ 
@@ -166,9 +168,9 @@ const App: React.FC = () => {
               <>
                 <Hero />
                 <About />
+                <Targeting onActionClick={openModal} />
                 <Features />
                 <Trust />
-                <Targeting onActionClick={openModal} />
                 <Company />
               </>
             ) : currentView === 'company' ? (

@@ -3,16 +3,17 @@ import React from 'react';
 
 interface NavbarProps {
   onJoinClick?: () => void;
-  onNavigate: (view: 'home' | 'company' | 'vision' | 'guide') => void;
-  currentView: 'home' | 'company' | 'vision' | 'guide';
+  onNavigate: (view: 'home' | 'company' | 'vision' | 'guide' | 'contact') => void;
+  currentView: 'home' | 'company' | 'vision' | 'guide' | 'contact';
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate, currentView }) => {
-  const navItems: { label: string; view: 'home' | 'company' | 'vision' | 'guide' }[] = [
+  const navItems: { label: string; view: 'home' | 'company' | 'vision' | 'guide' | 'contact' }[] = [
     { label: 'ホーム', view: 'home' },
     { label: 'アフィリエイト', view: 'guide' },
     { label: 'ビジョン', view: 'vision' },
     { label: '会社概要', view: 'company' },
+    { label: 'お問い合わせ', view: 'contact' },
   ];
 
   return (

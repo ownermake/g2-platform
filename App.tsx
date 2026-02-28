@@ -12,10 +12,11 @@ import ContactModal from './components/ContactModal';
 import CompanyPage from './pages/CompanyPage';
 import VisionPage from './pages/VisionPage';
 import GuidePage from './pages/GuidePage';
+import ContactPage from './pages/ContactPage';
 import Preloader from './components/Preloader';
 import TopActionHeader from './components/TopActionHeader';
 
-type View = 'home' | 'company' | 'vision' | 'guide';
+type View = 'home' | 'company' | 'vision' | 'guide' | 'contact';
 
 const App: React.FC = () => {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
@@ -170,6 +171,8 @@ const App: React.FC = () => {
               <CompanyPage />
             ) : currentView === 'vision' ? (
               <VisionPage />
+            ) : currentView === 'contact' ? (
+              <ContactPage />
             ) : (
               <GuidePage />
             )}

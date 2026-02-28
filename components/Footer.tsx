@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
                   回線準備中
                 </span>
               </div>
-              <p className="hover:text-[var(--blue)] transition-colors cursor-pointer">contact@g2-platform.com</p>
+              <p className="hover:text-[var(--blue)] transition-colors cursor-pointer">info@g2-platform.com</p>
             </div>
             <div>
               <p className="text-[9px] opacity-30 mb-6 font-black tracking-[0.5em] uppercase">所在地</p>

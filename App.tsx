@@ -172,7 +172,7 @@ const App: React.FC = () => {
             ) : currentView === 'vision' ? (
               <VisionPage />
             ) : currentView === 'contact' ? (
-              <ContactPage />
+              <ContactPage onNavigate={navigateTo} />
             ) : (
               <GuidePage />
             )}

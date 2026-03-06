@@ -1,16 +1,14 @@
 
 import React from 'react';
 
-interface TopActionHeaderProps {
-  onActionClick: () => void;
-}
-
-const TopActionHeader: React.FC<TopActionHeaderProps> = ({ onActionClick }) => {
+const TopActionHeader: React.FC = () => {
   return (
     <div className="fixed top-0 left-0 w-full z-[80] flex h-12 md:h-16 border-b-4 border-black">
       {/* Advertiser Action - Clean White */}
-      <button 
-        onClick={onActionClick}
+      <a 
+        href="https://trident.catsys.jp/"
+        target="_blank"
+        rel="noopener noreferrer"
         className="flex-1 bg-white text-black flex items-center justify-center gap-3 group hover:bg-black hover:text-white transition-colors duration-300"
       >
         <span className="font-black text-sm md:text-lg lg:text-xl tracking-[0.1em] italic uppercase">
@@ -19,11 +17,13 @@ const TopActionHeader: React.FC<TopActionHeaderProps> = ({ onActionClick }) => {
         <svg className="w-5 h-5 md:w-6 md:h-6 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="4">
           <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
-      </button>
+      </a>
 
       {/* Partner Action - Brand Blue */}
-      <button 
-        onClick={onActionClick}
+      <a 
+        href="https://trident.catsys.jp/"
+        target="_blank"
+        rel="noopener noreferrer"
         className="flex-1 bg-[var(--blue)] text-white flex items-center justify-center gap-3 group hover:bg-white hover:text-black transition-all duration-300 border-l-4 border-black"
       >
         <span className="font-black text-sm md:text-lg lg:text-xl tracking-[0.1em] italic uppercase">
@@ -33,7 +33,7 @@ const TopActionHeader: React.FC<TopActionHeaderProps> = ({ onActionClick }) => {
         <svg className="w-5 h-5 md:w-6 md:h-6 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="4">
           <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
         </svg>
-      </button>
+      </a>
     </div>
   );
 };

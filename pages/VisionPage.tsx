@@ -129,9 +129,14 @@ const VisionPage: React.FC = () => {
             未来の価値を共に創り、<br className="hidden md:block" />
             次世代のスタンダードを共に定義しませんか？
           </p>
-          <button className="neo-button bg-white text-black px-12 py-6 heading-brutal text-2xl md:text-4xl italic hover:bg-black hover:text-white transition-colors">
+          <a 
+            href="https://trident.catsys.jp/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="neo-button inline-block bg-white text-black px-12 py-6 heading-brutal text-2xl md:text-4xl italic hover:bg-black hover:text-white transition-colors"
+          >
             JOIN THE NETWORK
-          </button>
+          </a>
         </div>
       </section>
       <div className="py-20 bg-[var(--bg)]"></div>

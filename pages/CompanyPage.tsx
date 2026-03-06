@@ -53,41 +53,6 @@ const CompanyPage: React.FC = () => {
         </div>
       </section>
 
-      {/* CEO Message / Vision */}
-      <section className="px-6 md:px-10 mb-32">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-24 items-center">
-          <div className="fade-in-up visible">
-            <div className="aspect-[4/5] bg-gray-200 neo-border neo-shadow-blue overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1507005911827-430973a2a940?auto=format&fit=crop&q=80&w=1000" 
-                alt="CEO" 
-                className="w-full h-full object-cover grayscale"
-              />
-            </div>
-          </div>
-          <div className="fade-in-up visible" style={{ transitionDelay: '0.2s' }}>
-            <h2 className="heading-brutal text-4xl md:text-6xl mb-8 leading-none italic">
-              "THE REAL VALUE <br />LIES IN THE <span className="text-[var(--blue)]">FUTURE</span>."
-            </h2>
-            <div className="space-y-6 text-base md:text-lg font-bold leading-relaxed opacity-80">
-              <p>
-                インターネット広告の世界は、日々複雑化しています。しかし、その根底にある「価値を伝え、成果を生む」という本質は変わりません。
-              </p>
-              <p>
-                G2が目指すのは、単なる広告の仲介役ではありません。広告主様とパートナー様、双方が持続的に成長し続けられる「プラットフォーム」としての大在り方を追求しています。
-              </p>
-              <p>
-                不透明さを排除し、純粋な成果と信頼を積み上げる。それが、私たちが定義する次世代のスタンダードです。
-              </p>
-              <div className="pt-8">
-                <p className="text-xs uppercase tracking-widest opacity-40 mb-2">Representative Director / CEO</p>
-                <p className="text-3xl font-black heading-brutal italic">KENTO MIURA</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Marquee Decoration */}
       <div className="marquee-container rotate-2 translate-y-12">
         <div className="marquee-content text-[15vw] md:text-[8vw]">

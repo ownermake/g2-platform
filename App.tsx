@@ -154,7 +154,7 @@ const App: React.FC = () => {
       
       {!isLoading && (
         <>
-          <TopActionHeader onActionClick={openModal} />
+          <TopActionHeader />
           <Navbar onJoinClick={openModal} onNavigate={navigateTo} currentView={currentView} />
           
           <main className={`${isTransitioning ? 'opacity-0' : 'opacity-100'} transition-opacity duration-200 relative z-10`}>
@@ -162,7 +162,7 @@ const App: React.FC = () => {
               <>
                 <Hero />
                 <About />
-                <Targeting onActionClick={openModal} />
+                <Targeting />
                 <Features />
                 <Trust />
                 <Company />

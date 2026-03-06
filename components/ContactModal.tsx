@@ -30,10 +30,10 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
             {/* Status Header */}
             <div className="mb-6 text-center">
               <div className="mb-2 inline-block px-4 py-1 bg-black text-white text-[10px] font-black tracking-[0.3em] uppercase neo-border-sm border-2 border-black">
-                System Status: Building
+                System Status: Online
               </div>
               <h2 className="heading-brutal text-4xl md:text-5xl italic tracking-tighter leading-none">
-                SYSTEM IS <span className="text-[var(--blue)]">EVOLVING.</span>
+                SYSTEM IS <span className="text-[var(--blue)]">ONLINE.</span>
               </h2>
             </div>
 
@@ -72,12 +72,12 @@ const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) => {
 
             {/* Launch Status */}
             <div className="mt-10 bg-white neo-border p-6 md:p-8 w-full text-center">
-              <span className="text-[10px] font-black opacity-40 block mb-2 tracking-[0.4em] uppercase">Launch Window</span>
-              <span className="text-2xl md:text-4xl text-[var(--blue)] font-black italic uppercase tracking-tighter leading-none">2026.03 Global Launch</span>
+              <span className="text-[10px] font-black opacity-40 block mb-2 tracking-[0.4em] uppercase">Launch Status</span>
+              <span className="text-2xl md:text-4xl text-[var(--blue)] font-black italic uppercase tracking-tighter leading-none">2026.03 Launched</span>
             </div>
 
             <p className="mt-8 font-bold text-gray-400 text-center max-w-md text-[10px] md:text-xs leading-relaxed italic">
-              私たちは広告主とパートナー双方の利益を最大化する「究極のプラットフォーム」を構築しています。公開まで今しばらくお待ちください。
+              私たちは広告主とパートナー双方の利益を最大化する「究極のプラットフォーム」を提供しています。
             </p>
 
             <button 

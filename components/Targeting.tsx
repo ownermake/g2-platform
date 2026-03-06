@@ -48,12 +48,14 @@ const Targeting: React.FC<TargetingProps> = ({ onActionClick }) => {
               </p>
 
               <div className="mt-auto z-10">
-                <button 
-                  onClick={onActionClick}
-                  className="neo-button bg-white text-black px-6 py-5 md:py-6 font-black uppercase w-full tracking-tighter text-base sm:text-lg md:text-base lg:text-xl xl:text-2xl italic hover:bg-black hover:text-white transition-colors"
+                <a 
+                  href="https://trident.catsys.jp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neo-button inline-block text-center bg-white text-black px-6 py-5 md:py-6 font-black uppercase w-full tracking-tighter text-base sm:text-lg md:text-base lg:text-xl xl:text-2xl italic hover:bg-black hover:text-white transition-colors"
                 >
                   パートナーとして登録する
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -90,12 +92,14 @@ const Targeting: React.FC<TargetingProps> = ({ onActionClick }) => {
               </p>
 
               <div className="mt-auto z-10">
-                <button 
-                  onClick={onActionClick}
-                  className="neo-button bg-black text-white px-6 py-5 md:py-6 font-black uppercase w-full tracking-tighter text-base sm:text-lg md:text-base lg:text-xl xl:text-2xl italic hover:bg-[var(--blue)] transition-colors"
+                <a 
+                  href="https://trident.catsys.jp/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="neo-button inline-block text-center bg-black text-white px-6 py-5 md:py-6 font-black uppercase w-full tracking-tighter text-base sm:text-lg md:text-base lg:text-xl xl:text-2xl italic hover:bg-[var(--blue)] transition-colors"
                 >
                   広告主として登録する
-                </button>
+                </a>
               </div>
             </div>
           </div>
